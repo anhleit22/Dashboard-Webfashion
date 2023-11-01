@@ -1,9 +1,11 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import { Modal, TextField, Typography } from "@mui/material";
 import { Button } from "@mui/material";
 import AddIcon from "@mui/icons-material/Add";
 import CloseIcon from "@mui/icons-material/Close";
 import { Customer } from "../../typeGlobal";
+import { db } from "../../fireBaseConfig";
+import { addDoc, collection } from "firebase/firestore";
 
 const userNormal: Customer = {
   firstName: "",
@@ -11,13 +13,13 @@ const userNormal: Customer = {
   userName: "",
   password: "",
   email: "",
-  number: "",
 };
 
 export const ModalAddUer = () => {
   const [open, setOpen] = useState<boolean>(false);
   const [User, setUser] = useState<Customer>(userNormal);
   const [passwordsMatch, setPasswordsMatch] = useState<boolean>(true);
+  const [configPassword, setConfigPassword] = useState<string>("");
   const [validEmail, setValidEmail] = useState<boolean>(true);
 
   const handleOpen = () => setOpen(true);
@@ -28,7 +30,7 @@ export const ModalAddUer = () => {
     return emailRegex.test(email);
   };
   const handleSubmit = () => {
-    if (User.password === User.configPassword) {
+    if (User.password === configPassword) {
       setPasswordsMatch(true);
       setUser({
         ...User,
@@ -48,8 +50,16 @@ export const ModalAddUer = () => {
         setValidEmail(false);
       }
     }
-    if (passwordsMatch && validEmail) {
-      console.log("data");
+    console.log(User);
+    if (passwordsMatch === true && validEmail === true) {
+      const usersCollection = collection(db, "/User");
+      addDoc(usersCollection, User)
+        .then((docRef) => {
+          console.log("Dữ liệu đã được thêm thành công với ID:", docRef.id);
+        })
+        .catch((error) => {
+          console.error("Lỗi khi thêm dữ liệu:", error);
+        });
     }
   };
   return (
@@ -157,9 +167,9 @@ export const ModalAddUer = () => {
                 label="Confirm Password"
                 variant="filled"
                 type="password"
-                value={User.configPassword}
+                value={configPassword}
                 onChange={(e) => {
-                  setUser({ ...User, configPassword: e.target.value });
+                  setConfigPassword(e.target.value);
                 }}
               />
             </div>
@@ -168,36 +178,23 @@ export const ModalAddUer = () => {
                 - password don't match
               </span>
             )}
-            <div>
-              <TextField
-                sx={{
-                  margin: "10px 5px",
-                }}
-                label="Email"
-                variant="filled"
-                value={User.email}
-                onChange={(e) => {
-                  setUser({ ...User, email: e.target.value });
-                }}
-              />
-              <TextField
-                sx={{
-                  margin: "10px 5px",
-                }}
-                label="Number"
-                variant="filled"
-                value={User.number}
-                onChange={(e) => {
-                  setUser({ ...User, number: e.target.value });
-                }}
-              />
-            </div>
-            {!validEmail && (
-              <span className="ml-[5px] text-[12px] text-[red]">
-                - don't format email
-              </span>
-            )}
+            <TextField
+              sx={{
+                margin: "10px 5px",
+              }}
+              label="Email"
+              variant="filled"
+              value={User.email}
+              onChange={(e) => {
+                setUser({ ...User, email: e.target.value });
+              }}
+            />
           </div>
+          {!validEmail && (
+            <span className="ml-[5px] text-[12px] text-[red]">
+              - don't format email
+            </span>
+          )}
           <div className="flex flex-row-reverse">
             <Button
               onClick={handleSubmit}

@@ -26,7 +26,5 @@ export type Customer = {
   lastName?: string;
   userName: string;
   password?: string;
-  configPassword?: string;
   email?: string | "";
-  number?: number | string;
 };

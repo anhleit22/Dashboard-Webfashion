@@ -1,6 +1,7 @@
 import { initializeApp } from "firebase/app";
 import { getFirestore } from "firebase/firestore";
 
+
 export const firebaseConfig = {
   apiKey: "AIzaSyCjdWfxhKcwQZ_EokJkxrpcs9VTyV9ws98",
   authDomain: "my-react-app-dash-board.firebaseapp.com",
