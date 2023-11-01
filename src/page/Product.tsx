@@ -1,9 +1,8 @@
 import { Card, Container, Grid } from "@mui/material";
 import { useState, useEffect } from "react";
-import { listproduct } from "../data/mockProduct";
 import { doc, getDoc } from "firebase/firestore";
 import { db } from "../fireBaseConfig";
-import { product} from "../typeGlobal";
+import { product } from "../typeGlobal";
 
 export const Product = () => {
   const [Production, setProduction] = useState<any>();
