@@ -1,24 +1,34 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import { Route, Routes } from "react-router-dom";
+
+import { publicRoutes } from "./routes";
+import { LayoutDefault } from "./components/layout/LayoutDefault";
+import { OnlyLayout } from "./components/layout/OnlyLayout";
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div className="h-[100vh]">
+      <Routes>
+        {publicRoutes.map((component, index) => {
+          let Layout = LayoutDefault;
+          const Page = component.component;
+          if (component.path !== "/" && component.path !== "/404") {
+            Layout = LayoutDefault;
+          } else {
+            Layout = OnlyLayout;
+          }
+          return (
+            <Route
+              key={index}
+              path={component.path}
+              element={
+                <Layout>
+                  <Page />
+                </Layout>
+              }
+            />
+          );
+        })}
+      </Routes>
     </div>
   );
 }
