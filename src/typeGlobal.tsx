@@ -21,3 +21,12 @@ export type product = {
   reducePrice?: boolean;
   salestate?: boolean;
 };
+export type Customer = {
+  firstName?: string;
+  lastName?: string;
+  userName: string;
+  password?: string;
+  configPassword?: string;
+  email?: string | "";
+  number?: number | string;
+};

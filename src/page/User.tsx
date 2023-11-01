@@ -2,10 +2,12 @@ import Box from "@mui/material/Box";
 import { DataGrid } from "@mui/x-data-grid";
 import { Card, Container } from "@mui/material";
 import { ModalAddUer } from "../components/modalAddUser/ModalAddUer";
-import { columns, row, rows } from "../data/mockUser";
+import { columns, row } from "../data/mockUser";
 import { useEffect, useState } from "react";
 import { db } from "../fireBaseConfig";
 import { doc, getDoc } from "firebase/firestore";
+
+
 
 export const User = () => {
   const [Customer, setCustomer] = useState<any>([]);

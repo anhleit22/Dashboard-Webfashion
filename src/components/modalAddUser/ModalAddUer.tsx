@@ -1,13 +1,57 @@
-import React from "react";
+import React, { useState } from "react";
 import { Modal, TextField, Typography } from "@mui/material";
 import { Button } from "@mui/material";
 import AddIcon from "@mui/icons-material/Add";
 import CloseIcon from "@mui/icons-material/Close";
+import { Customer } from "../../typeGlobal";
+
+const userNormal: Customer = {
+  firstName: "",
+  lastName: "",
+  userName: "",
+  password: "",
+  email: "",
+  number: "",
+};
 
 export const ModalAddUer = () => {
-  const [open, setOpen] = React.useState(false);
+  const [open, setOpen] = useState<boolean>(false);
+  const [User, setUser] = useState<Customer>(userNormal);
+  const [passwordsMatch, setPasswordsMatch] = useState<boolean>(true);
+  const [validEmail, setValidEmail] = useState<boolean>(true);
+
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
+
+  const isEmailValid = (email: string): boolean => {
+    const emailRegex = /^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,}$/;
+    return emailRegex.test(email);
+  };
+  const handleSubmit = () => {
+    if (User.password === User.configPassword) {
+      setPasswordsMatch(true);
+      setUser({
+        ...User,
+        password: User.password,
+      });
+    } else {
+      setPasswordsMatch(false);
+    }
+    if (User && User.email) {
+      if (isEmailValid(User.email)) {
+        setUser({
+          ...User,
+          email: User.email,
+        });
+        setValidEmail(true);
+      } else {
+        setValidEmail(false);
+      }
+    }
+    if (passwordsMatch && validEmail) {
+      console.log("data");
+    }
+  };
   return (
     <div>
       <Button
@@ -65,6 +109,10 @@ export const ModalAddUer = () => {
                 }}
                 label="First Name"
                 variant="filled"
+                value={User.firstName}
+                onChange={(e) => {
+                  setUser({ ...User, firstName: e.target.value });
+                }}
               />
               <TextField
                 sx={{
@@ -72,6 +120,10 @@ export const ModalAddUer = () => {
                 }}
                 label="Last Name"
                 variant="filled"
+                value={User.lastName}
+                onChange={(e) => {
+                  setUser({ ...User, lastName: e.target.value });
+                }}
               />
             </div>
             <TextField
@@ -80,6 +132,10 @@ export const ModalAddUer = () => {
               }}
               label="User Name"
               variant="filled"
+              value={User.userName}
+              onChange={(e) => {
+                setUser({ ...User, userName: e.target.value });
+              }}
             />
             <div>
               <TextField
@@ -89,6 +145,10 @@ export const ModalAddUer = () => {
                 label="Password"
                 variant="filled"
                 type="password"
+                value={User.password}
+                onChange={(e) => {
+                  setUser({ ...User, password: e.target.value });
+                }}
               />
               <TextField
                 sx={{
@@ -97,8 +157,17 @@ export const ModalAddUer = () => {
                 label="Confirm Password"
                 variant="filled"
                 type="password"
+                value={User.configPassword}
+                onChange={(e) => {
+                  setUser({ ...User, configPassword: e.target.value });
+                }}
               />
             </div>
+            {!passwordsMatch && (
+              <span className="ml-[5px] text-[12px] text-[red]">
+                - password don't match
+              </span>
+            )}
             <div>
               <TextField
                 sx={{
@@ -106,6 +175,10 @@ export const ModalAddUer = () => {
                 }}
                 label="Email"
                 variant="filled"
+                value={User.email}
+                onChange={(e) => {
+                  setUser({ ...User, email: e.target.value });
+                }}
               />
               <TextField
                 sx={{
@@ -113,11 +186,21 @@ export const ModalAddUer = () => {
                 }}
                 label="Number"
                 variant="filled"
+                value={User.number}
+                onChange={(e) => {
+                  setUser({ ...User, number: e.target.value });
+                }}
               />
             </div>
+            {!validEmail && (
+              <span className="ml-[5px] text-[12px] text-[red]">
+                - don't format email
+              </span>
+            )}
           </div>
           <div className="flex flex-row-reverse">
             <Button
+              onClick={handleSubmit}
               sx={{
                 color: "white",
                 backgroundColor: "black",
