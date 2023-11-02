@@ -7,8 +7,6 @@ import { useEffect, useState } from "react";
 import { db } from "../fireBaseConfig";
 import { doc, getDoc } from "firebase/firestore";
 
-
-
 export const User = () => {
   const [Customer, setCustomer] = useState<any>([]);
   useEffect(() => {

@@ -8,6 +8,7 @@ interface Props {
 }
 
 export const Paper: FC<Props> = (props) => {
+
   return (
     <Card>
       <div className=" py-[40px] px-[24px] flex justify-center items-center ">

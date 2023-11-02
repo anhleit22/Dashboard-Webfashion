@@ -11,6 +11,7 @@ import { NewCard } from "../components/paperCard/NewCard";
 import { TimeLineAccessProduct } from "../components/timeline/TimeLineAccessProduct";
 
 export const Dashboard: React.FC = () => {
+  
   return (
     <div className="px-[24px] mb-[40px]">
       <div className="w-full">

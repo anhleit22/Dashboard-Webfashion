@@ -4,8 +4,7 @@ import { Button } from "@mui/material";
 import AddIcon from "@mui/icons-material/Add";
 import CloseIcon from "@mui/icons-material/Close";
 import { Customer } from "../../typeGlobal";
-import { db } from "../../fireBaseConfig";
-import { addDoc, collection } from "firebase/firestore";
+import { getDatabase, ref, set } from "firebase/database";
 
 const userNormal: Customer = {
   firstName: "",
@@ -15,6 +14,7 @@ const userNormal: Customer = {
   email: "",
 };
 
+let nextId = 1;
 export const ModalAddUer = () => {
   const [open, setOpen] = useState<boolean>(false);
   const [User, setUser] = useState<Customer>(userNormal);
@@ -28,6 +28,16 @@ export const ModalAddUer = () => {
   const isEmailValid = (email: string): boolean => {
     const emailRegex = /^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,}$/;
     return emailRegex.test(email);
+  };
+
+  const createObject = (User: Customer) => {
+    const UserNew = { ...User };
+    const newObj = {
+      id: nextId,
+      ...UserNew,
+    };
+    nextId += 1;
+    return newObj;
   };
   const handleSubmit = () => {
     if (User.password === configPassword) {
@@ -50,16 +60,18 @@ export const ModalAddUer = () => {
         setValidEmail(false);
       }
     }
-    console.log(User);
-    if (passwordsMatch === true && validEmail === true) {
-      const usersCollection = collection(db, "/User");
-      addDoc(usersCollection, User)
-        .then((docRef) => {
-          console.log("Dữ liệu đã được thêm thành công với ID:", docRef.id);
+
+    const database = getDatabase();
+    if (validEmail === true && passwordsMatch === true) {
+      const usernew = createObject(User);
+      set(ref(database, "User/" + usernew.id), usernew)
+        .then(() => {
+          alert("Add user access");
         })
         .catch((error) => {
-          console.error("Lỗi khi thêm dữ liệu:", error);
+          console.log(error);
         });
+      setUser(userNormal);
     }
   };
   return (

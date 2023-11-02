@@ -22,6 +22,7 @@ export type product = {
   salestate?: boolean;
 };
 export type Customer = {
+  id?: number;
   firstName?: string;
   lastName?: string;
   userName: string;
