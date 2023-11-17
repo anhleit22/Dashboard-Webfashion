@@ -4,5 +4,6 @@ const Routes = {
     user: "/user",
     product: "/product",
     notfound: "/404",
+    blog: "/blog",
 }
 export default Routes;

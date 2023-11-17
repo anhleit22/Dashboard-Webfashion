@@ -1,4 +1,4 @@
-import React, { FC } from "react";
+import { FC } from "react";
 import Card from "@mui/material/Card";
 import CardContent from "@mui/material/CardContent";
 import { PropsItem } from "../../typeGlobal";
@@ -8,7 +8,6 @@ interface Props {
 }
 
 export const Paper: FC<Props> = (props) => {
-
   return (
     <Card>
       <div className=" py-[40px] px-[24px] flex justify-center items-center ">
@@ -21,7 +20,7 @@ export const Paper: FC<Props> = (props) => {
         </div>
         <div>
           <h1 className="text-center font-bold text-[24px]">
-            {props.item.header}
+            {props.item.header}K
           </h1>
           <CardContent className="text-web-300 text-[14px]">
             {props.item.title}

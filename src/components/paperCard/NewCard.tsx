@@ -8,7 +8,11 @@ export const NewCard = () => {
       <CardContent>
         <h3 className="font-bold">New Updates</h3>
       </CardContent>
-      <CardContent>
+      <CardContent
+        sx={{
+          paddingTop: "0px",
+        }}
+      >
         <div className="flex items-center mt-[16px]">
           <img
             className="w-[48px] h-[48px] rounded-xl"
@@ -26,7 +30,52 @@ export const NewCard = () => {
           </span>
         </div>
       </CardContent>
-      <div className="flex flex-row-reverse p-4 border-t border-dashed border-[#b2bac1]">
+      <CardContent
+        sx={{
+          paddingTop: "0px",
+        }}
+      >
+        <div className="flex items-center mt-[16px]">
+          <img
+            className="w-[48px] h-[48px] rounded-xl"
+            alt="LehoangAnh"
+            src="https://minimal-kit-react.vercel.app/assets/images/covers/cover_1.jpg"
+          />
+          <div className="ml-[16px]">
+            <p className="font-bold ">Chief Tactics Agent</p>
+            <p className=" text-[#b2bac1]">
+              The Football Is Good For Training And Recreational Purposes
+            </p>
+          </div>
+          <span className="text-[12px] text-[#b2bac1] ml-10 pr-7">
+            about 17 hours ago
+          </span>
+        </div>
+      </CardContent>
+      <CardContent
+        sx={{
+          paddingTop: "0px",
+        }}
+      >
+        <div className="flex items-center mt-[16px]">
+          <img
+            className="w-[48px] h-[48px] rounded-xl"
+            alt="LehoangAnh"
+            src="https://minimal-kit-react.vercel.app/assets/images/covers/cover_1.jpg"
+          />
+          <div className="ml-[16px]">
+            <p className="font-bold ">Chief Tactics Agent</p>
+            <p className=" text-[#b2bac1]">
+              The Football Is Good For Training And Recreational Purposes
+            </p>
+          </div>
+          <span className="text-[12px] text-[#b2bac1] ml-10 pr-7">
+            about 17 hours ago
+          </span>
+        </div>
+      </CardContent>
+
+      <div className="flex flex-row-reverse p-4 border-t border-dashed border-[#b2bac1] mt-[16px]">
         <Button
           sx={{
             color: "black",

@@ -4,7 +4,7 @@ export type layoutProps = {
 export type PropsItem = {
   thumbnail?: string;
   title?: string;
-  header?: string;
+  header?: number;
 };
 export type User = {
   email: string;
@@ -28,4 +28,27 @@ export type Customer = {
   userName: string;
   password?: string;
   email?: string | "";
+};
+export type ProcessItem = {
+  address: string;
+  listporduct: string;
+  name: string;
+  numberphone: number;
+  total: number;
+};
+export type Blog = {
+  author?: string;
+  content?: string;
+  datetime: object;
+  link: string;
+  thumbnail: string;
+  tittle: string;
+};
+export type BlogConvert = {
+  author?: string;
+  content?: string;
+  datetime: string;
+  link: string;
+  thumbnail: string;
+  tittle: string;
 };

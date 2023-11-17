@@ -143,6 +143,7 @@ export const Login: React.FC = () => {
             )}
             Login
           </button>
+          <span>eve.holt@reqres.in-cityslicka</span>
         </div>
       </div>
     </div>

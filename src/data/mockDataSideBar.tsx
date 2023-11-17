@@ -3,6 +3,7 @@ import AccountCircleIcon from "@mui/icons-material/AccountCircle";
 import LoginIcon from "@mui/icons-material/Login";
 import ProductionQuantityLimitsIcon from "@mui/icons-material/ProductionQuantityLimits";
 import NotInterestedIcon from "@mui/icons-material/NotInterested";
+import BookIcon from "@mui/icons-material/Book";
 
 import config from "../config";
 
@@ -21,6 +22,11 @@ export const listMenu = [
     title: "Product",
     icon: ProductionQuantityLimitsIcon,
     tofrom: config.Routes.product,
+  },
+  {
+    title: "Blog",
+    icon: BookIcon,
+    tofrom: config.Routes.blog,
   },
   {
     title: "Login",

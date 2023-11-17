@@ -1,8 +1,10 @@
-import { Card, Container, Grid } from "@mui/material";
+import { Card, Container, Grid, IconButton } from "@mui/material";
 import { useState, useEffect } from "react";
 import { doc, getDoc } from "firebase/firestore";
 import { db } from "../fireBaseConfig";
 import { product } from "../typeGlobal";
+import { ModalAddProduct } from "../components/modal/ModalAddProduct";
+import CloseIcon from "@mui/icons-material/Close";
 
 export const Product = () => {
   const [Production, setProduction] = useState<any>();
@@ -18,17 +20,34 @@ export const Product = () => {
 
     getAllData();
   }, []);
-  console.log(Production?.listProduct);
+  type propDelete = {
+    id: number;
+  };
+  const handleDelete = (idProduct: propDelete) => {
+    const indexToDelete = Production?.listProduct?.findIndex(
+      (product: any) => product.id === idProduct.id
+    );
+    if (indexToDelete !== -1) {
+      const updatedList = [...Production.listProduct];
+      updatedList.splice(indexToDelete, 1);
+
+      setProduction((prevState: any) => ({
+        ...prevState,
+        listProduct: updatedList,
+      }));
+    }
+  };
   return (
     <Container>
-      <div className="mb-[70px]">
-        <h2 className="font-bold text-[20px]">Products</h2>
+      <div className="my-[30px] flex justify-between">
+        <h2 className="font-bold text-[24px]">Products</h2>
+        <ModalAddProduct />
       </div>
       <Grid container spacing={5}>
         {Production?.listProduct?.map((product: product) => (
           <Grid key={product.id} item md={3} sm={6}>
             <Card>
-              <div className="relative">
+              <div className="group relative cursor-pointer">
                 {product.state && (
                   <span className="absolute bg-[#ff5630] m-2 p-[4px] rounded-lg uppercase text-[10px] font-semibold text-[white]">
                     new
@@ -44,6 +63,11 @@ export const Product = () => {
                   className="w-full h-[252px] object-cover"
                   src={product.thumbnail}
                 ></img>
+                <div className="absolute top-0 right-0 hidden group-hover:block">
+                  <IconButton onClick={() => handleDelete({ id: product.id })}>
+                    <CloseIcon />
+                  </IconButton>
+                </div>
               </div>
               <div className="p-[24px] text-center">
                 <h4 className="font-semibold text-[14px]">{product.title}</h4>

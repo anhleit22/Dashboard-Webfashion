@@ -1,4 +1,3 @@
-import React from "react";
 import { Card, CardContent, Container, Grid } from "@mui/material";
 import FacebookIcon from "@mui/icons-material/Facebook";
 

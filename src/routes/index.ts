@@ -1,4 +1,5 @@
 import config from "../config";
+import { Blog } from "../page/Blog";
 import { Dashboard } from "../page/Dashboard";
 
 import { Login } from "../page/Login";
@@ -13,5 +14,7 @@ const publicRoutes = [
     {path: config.Routes.product, component: Product },
     {path: config.Routes.user, component: User },
     {path: config.Routes.notfound, component: NotFound },
+    {path: config.Routes.blog, component: Blog },
+    
 ]
 export {publicRoutes};

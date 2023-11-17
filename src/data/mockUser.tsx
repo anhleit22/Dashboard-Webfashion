@@ -1,7 +1,5 @@
 import { GridColDef } from "@mui/x-data-grid";
 
-export const row = [];
-
 export const rows = [
   {
     id: 1,
